@@ -1,16 +1,16 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='/images/snip_web.png')}}" style="width: 8px; height: 8px;"> 
 
     
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css')}}">
-   
-        <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
     
+        <title>Sign Up</title>
+     
 </head>
 
 
@@ -19,12 +19,13 @@
 
     <div class="signupFrm">
       
-          <form action="{{ url_for('auth.login') }}" method="POST" class="form">
+          <form action="" method="POST" class="form">
+            {% csrf_token %}
             <h1 class="title">Login</h1>
 
             <center>
               <p>
-                Don't have an account? <a href="{{url_for('auth.signup')}}">Sign up</a>
+                Don't have an account? <a href="/signup">Sign up</a>
               </p>
             </center>
     
@@ -40,9 +41,7 @@
             
               <input type="submit" class="submitBtn" value="Sign In">
               <center>
-                <p>
-                  Forgot password? <a href="{{url_for('auth.forgot_password')}}">Click here</a>
-                </p>
+                
               </center>
           </form>
     </div>

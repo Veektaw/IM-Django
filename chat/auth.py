@@ -48,7 +48,7 @@ def signup(request):
         return render(request, 'signup.html')
     
     
-def signin(request):
+def login(request):
     
     if request.method == 'POST':
         username = request.POST['username']
@@ -62,13 +62,13 @@ def signin(request):
         
         else:
             messages.info(request, 'Invalid credentials')
-            return redirect('signin')
+            return redirect('login')
         
     else:
-        return render(request, 'signin.html')
+        return render(request, 'login.html')
     
 
-@login_required(login_url='signin')
+@login_required(login_url='login')
 def logout(request):
     auth.logout(request)
     return redirect('signin')
