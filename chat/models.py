@@ -15,33 +15,23 @@ class Profile(models.Model):
     
 
 
+class Conversation(models.Model):
+    conversation_id = models.AutoField(primary_key=True)
+    participants = models.ManyToManyField(User, related_name='conversations')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Conversation {self.conversation_id}"
+    
+    
 class Message(models.Model):
-    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
-    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_messages')
+    conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE)
+    sender = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['-timestamp']
+        ordering = ['timestamp']
 
 
-class Chat(models.Model):
-    participants = models.ManyToManyField(User, related_name='chats')
-    messages = models.ManyToManyField(Message)
 
-    def get_last_message(self):
-        return self.messages.order_by('-timestamp').first()
-
-
-class ChatMember(models.Model):
-    chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    
-
-
-class Contact(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='contacts')
-    contact = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    class Meta:
-        unique_together = ('user', 'contact')
