@@ -5,12 +5,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponse
 from .models import Profile
-from itertools import chain
+from .views import chatpage
 
 
 
 def signup(request):
-    
     if request.method == 'POST':
         username = request.POST['username']
         email = request.POST['email']
@@ -18,34 +17,30 @@ def signup(request):
         password2 = request.POST['password2']
         
         if password == password2:
-            
             if User.objects.filter(email=email).exists():
                 messages.info(request, 'Email already exists')
                 return redirect('signup')
             
             elif User.objects.filter(username=username).exists():
-                messages.info(request, 'Username is taken ')
+                messages.info(request, 'Username is taken')
                 return redirect('signup')
             
             else:
                 user = User.objects.create_user(username=username, email=email, password=password)
-                user.save
-                
+                user.save()  # Fix: Add parentheses after save()
+
                 # Logs a user in upon signup
                 user_login = auth.authenticate(username=username, password=password)
                 auth.login(request, user_login)
                 
-                
-                # Create a user profile which is redirected to the settings page
-                return redirect('interface')
-                
+                # Create a user profile which is redirected to the chat page
+                return redirect('chatpage')
                 
         else:
             messages.info(request, 'Passwords do not match')
             return redirect('signup')
         
-    else:
-        return render(request, 'signup.html')
+    return redirect('/')
     
     
 def login(request):
@@ -58,15 +53,13 @@ def login(request):
         
         if user is not None:
             auth.login(request, user)
-            return redirect('/')
+            return redirect('chatpage')
         
         else:
             messages.info(request, 'Invalid credentials')
             return redirect('login')
         
-    else:
-        return render(request, 'login.html')
-    
+    return redirect('/')
 
 @login_required(login_url='login')
 def logout(request):

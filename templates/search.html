@@ -11,7 +11,7 @@
     <title>Home</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+    <link rel="stylesheet" href="{% static 'css/find.css' %}">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -19,14 +19,27 @@
 
 <body>
 
-<div class="wrap">
-    <div class="search">
-       <input type="text" class="searchTerm" placeholder="Who are you looking for?">
-       <button type="submit" class="searchButton">
-         <i class="fa fa-search"></i>
-      </button>
+    <h1>Search for User</h1>
+
+    <!-- You just need to get this field. Start -->
+    <script src="https://kit.fontawesome.com/d97b87339f.js" crossorigin="anonymous"></script>
+    
+    <div class="search-box">
+      <input class="search-input" type="text" placeholder="Search something..">
+      <button class="search-btn"><i class="fas fa-search"></i></button>
     </div>
- </div>
+    <!-- You just need to get this field. End -->
+
+    <section>
+        <h2 style="color: aliceblue;">User</h2>
+        <p style="text-align: left; margin-left: 15px; color: aliceblue;">Name: </p>
+        <p style="text-align: left; margin-left: 15px; color: aliceblue;">Email: </p>
+        <button>Chat</button>
+      </section>
+    
+      <div class="footer">
+      
+    </div>
 
 
 </body>
