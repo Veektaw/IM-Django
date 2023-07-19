@@ -53,7 +53,7 @@ def login(request):
         
         if user is not None:
             auth.login(request, user)
-            return redirect('chatpage')
+            return redirect('search')
         
         else:
             messages.info(request, 'Invalid credentials')
