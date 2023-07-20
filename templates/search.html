@@ -23,7 +23,7 @@
     <script src="https://kit.fontawesome.com/d97b87339f.js" crossorigin="anonymous"></script>
 
     <div class="search-box">
-        <form method="post" action="{% url 'search' %}" style="width: 100%; margin-left: auto; margin-right: auto;">
+        <form method="POST" action="{% url 'search' %}" style="width: 100%; margin-left: auto; margin-right: auto;">
             {% csrf_token %}
                 <input class="search-input" type="text" name="username" placeholder="Search for user.." style="width: 83%; margin-left: auto; margin-right: auto;">
                 <button class="search-btn" type="submit" id="searchButton"><i class="fas fa-search"></i></button>
@@ -36,6 +36,8 @@
         {% if users_profile_list %}
             {% for profile in users_profile_list %}
             <section>
+                <p style="text-align: left; margin-left: 15px; color: aliceblue;">Number of Users: {{ users_profile_list|length }}</p>
+                <p style="text-align: left; margin-left: 15px; color: aliceblue;">Name: {{ profile.user.first_name }}</p>
                 <p style="text-align: left; margin-left: 15px; color: aliceblue;">Username: {{ profile.user.username }}</p>
                 <p style="text-align: left; margin-left: 15px; color: aliceblue;">Email: {{ profile.user.email }}</p>
                 <button class="button-3d">Chat</button>

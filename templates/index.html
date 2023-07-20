@@ -24,7 +24,7 @@
 	<div class="container">
 		<div class="forms-container">
 			<div class="signin-signup">
-				<form action="#" class="sign-in-form" method="POST">
+				<form action="{% url 'login' %}" class="sign-in-form" method="POST">
                     {% csrf_token %}
                     <h2 class="title">Login</h2>
                     <div class="input-field">
@@ -41,6 +41,10 @@
 				<form action="{% url 'signup' %}" class="sign-up-form" method="POST">
                     {% csrf_token %}
                     <h2 class="title">Sign up</h2>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="text" placeholder="Name" name="first_name" required>
+                    </div>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
                         <input type="text" placeholder="Username" name="username" required>

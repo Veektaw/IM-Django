@@ -17,6 +17,9 @@ def chatpage(request):
 
 @login_required(login_url='login')
 def search(request):
+    
+    
+    print("Search view called!")
     current_user = User.objects.filter(username=request.user.username).first()
     if not current_user:
         print("Current User does not exist")
