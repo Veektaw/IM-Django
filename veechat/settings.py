@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'chat'
+    'chat',
+    'room'
 ]
 
 MIDDLEWARE = [
@@ -61,6 +62,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'veechat.wsgi.application'
 ASGI_APPLICATION = 'veechat.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default':{
+        'BACKEND': 'channels.layers.InMemoryChannelLayer'
+    }
+}
 
 
 # Database

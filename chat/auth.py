@@ -38,7 +38,7 @@ def signup(request):
                 auth.login(request, user_login)
                 
                 # Redirect to the search page
-                return redirect('search')
+                return redirect('rooms')
                 
         else:
             messages.info(request, 'Passwords do not match')
@@ -58,7 +58,7 @@ def login(request):
         
         if user is not None:
             auth.login(request, user)
-            return redirect('search')
+            return redirect('rooms')
         
         else:
             messages.info(request, 'Invalid credentials')
