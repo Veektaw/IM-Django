@@ -4,10 +4,11 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{% static 'favicon.png' %}" rel="icon" type="image/png">
-    <title>Home</title>
+   {% block title %} <title>{{room.name}}</title> {% endblock %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -72,7 +73,22 @@
         </form>
       </section>
 
-    <script src="../static/js/chat.js"></script>
+      {{ room.slug|json_script:"json-roomname" }}
+
+      <script>
+          document.addEventListener('DOMContentLoaded', function () {
+              const roomName = JSON.parse(document.getElementById('json-roomname').textContent);
+              const chatSocket = new WebSocket('ws://' + window.location.host + '/ws/' + roomName + '/');
+  
+              chatSocket.onmessage = function (e) {
+                  console.log(e.data); 
+              }
+  
+              chatSocket.onclose = function (e) {
+                  console.log('WebSocket closed');
+              }
+          });
+      </script>
 
 
 </body>
